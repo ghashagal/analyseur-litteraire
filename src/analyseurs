@@ -1,0 +1,17 @@
+from abc import ABC, abstractmethod
+
+class AnalyseurTexte(ABC):
+  @abstractmethod
+  def analyser(self, texte: "Texte") -> dict: ...
+  def analyser_corpus(self, texts: list["Texte"]) -> list[dict]:
+    return [self.analyser(t) for t in texts]
+
+  class CompteurFrequence(AnalyseurFrequence):
+    def frequence(self) -> int :
+    frequence = Counter(self.contenu.split())
+    print(frequence)
+
+  class CompteurLongueur(AnalyseurLongueur):
+    def analyser(self, texte: "Texte") -> dict:
+      mots = texte.resume().lower().split()
+      return {"total": len(mots), "uniques": len(set(mots))}
