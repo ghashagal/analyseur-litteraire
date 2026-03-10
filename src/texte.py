@@ -2,7 +2,7 @@ from collections import Counter
 
 class Texte:
 
-    def __init__(self, titre: str, auteur: str, contenu:str, annee: int):
+    def __init__(self, titre: str, auteur: str, contenu : str, annee: int):
         self.titre = titre
         self.auteur = auteur
         self.contenu = contenu
@@ -46,6 +46,11 @@ class Texte:
     
     def __str__(self) ->str:
         return f"{self.titre} ({self.auteur}, {self.annee})"
+    
+    def resume(self) -> str:
+        return self.contenu[:50] + "..."
+    
+
 
 
 
