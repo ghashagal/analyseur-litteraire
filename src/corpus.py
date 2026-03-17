@@ -1,4 +1,6 @@
-from texte import Texte, Madame_Bovary, Echec
+from documentcomplet import ExporterCsv, ExporterHtml
+from texte import Texte
+
 
 
 
@@ -7,6 +9,9 @@ class Corpus:
     def __init__(self, nom : str):
         self.nom = nom
         self._textes = []
+        self.ExporterHtml = ExporterHtml()
+        self.ExporterCsv = ExporterCsv()
+
     
     def ajouter(self, texte : Texte) ->None:
         self._textes.append(texte)
@@ -40,16 +45,24 @@ class Corpus:
             nouveau.ajouter(t)
             return nouveau
     
+    
+    
+if __name__ == "__main__":
 
+    Madame_Bovary = Texte("Bovary", "Flaubert", "Je ne suis pas pret de deguster ma merguez", 1997)
+    corpus = Corpus("mon corpus")
+    corpus.ajouter(Madame_Bovary)
+    
+    bib = Corpus("mon corpus")
+    bib.ajouter(Madame_Bovary)
 
-bib = Corpus("BU Lettres")
-bib.ajouter(Madame_Bovary)
+    Echec = Texte("Les Echecs de Ma Vie", "Bugnon", "Je suis un echec, ma vie n'a pas de sens", 2026 )
+    corpus2 = Corpus("mon corpus2")
+    bib1 = Corpus("mon corpus2")
+    bib1.ajouter(Echec)
 
-bib1 = Corpus("BU Math")
-bib1.ajouter(Echec)
+    bib3 = bib + bib1
 
-bib3 = bib + bib1
-
-for t in bib3:
-    print(t)
+    for t in bib3:
+        print(t)
 
