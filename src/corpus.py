@@ -1,5 +1,5 @@
 from collections.abc import Iterator
-
+from documentcomplet import ExportHtml, ExportCsv
 from texte import Texte
 
 
@@ -7,6 +7,8 @@ class Corpus:
     def __init__(self, nom : str):
         self.nom = nom
         self._textes = []
+        self.ExportHtml = ExportHtml()
+        self.ExportCsv = ExportCsv()
 
     def ajouter(self, texte : Texte) ->None:
         self._textes.append(texte)
