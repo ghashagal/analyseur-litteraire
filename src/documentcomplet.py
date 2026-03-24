@@ -20,4 +20,4 @@ class ExporterCsv(Exportateur):
 class Sauvegarder(Exportateur):
     def sauvegarder(self, chemin, texte): 
      with open(chemin, "w") as f: 
-         f.write(texte.contenu)
+        f.write(texte.contenu)
