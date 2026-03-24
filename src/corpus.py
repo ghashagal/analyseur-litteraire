@@ -1,4 +1,4 @@
-from documentcomplet import ExporterCsv, ExporterHtml
+from exportateurs import ExporterCsv, ExporterHtml
 from texte import Texte
 
 
