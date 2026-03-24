@@ -11,15 +11,32 @@ class Exportateur(ABC):
         ...
 
 class ExportHtml(Exportateur):
-    def exporter(texte : Texte):
+    def exporter(self, texte : Texte):
         return f" <h1 >{texte.titre}</h1><p>{texte.contenu}</p>"
     
 class ExportCsv(Exportateur):
-    def exporter(texte : Texte):
+    def exporter(self, texte : Texte):
         return "\n".join(f"{m}, {c}" for m, c in texte.frequences().items())
 
 class Sauvegarder(Exportateur):
     def sauvegarder(self, chemin, texte):
         with open (chemin, "w") as f:
             f.write(texte.contenu)
+
+class ExportMarkdown(Exportateur): ...
+# La Factory : un dict de classes suffit en Python
+EXPORTATEURS: dict[str, type[Exportateur]] = {
+    "html": ExportHtml, "csv": ExportCsv, "md": ExportMarkdown,
+}
+def creer_exportateur(format: str) -> Exportateur:
+    cls = EXPORTATEURS.get(format)
+    if cls is None:
+        raise ValueError(f"Format inconnu : {format}")
+    return cls()
+
+
+if __name__ == "__main__":
+    texte = Texte("Bovary", "Flaubert", "Il fait beau aujourd'hui", 1920)
+    exportateur = creer_exportateur("html")
+    print(exportateur.exporter(texte))
 
